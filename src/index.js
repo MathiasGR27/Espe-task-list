@@ -1,1 +1,2 @@
-import "./components/app.js";
+import "./components/navbar";
+import "./components/espe-task-list";
