@@ -30,6 +30,7 @@ Componente modal reutilizable para crear, editar o ver tareas. Se muestra u ocul
 
 ### 3. `<navbar>`
 Componente para el header en donde contiene una barra de navegacion 
+
 ---
 
 ## Características
@@ -77,7 +78,7 @@ Y el componente padre escucha este evento:
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 TASK-MANAGER/
@@ -131,17 +132,17 @@ Y asi se ve la en la pagina web una vez agregada la tarea ya listada
 
 Aqui mediante este modal vamos a poder ver la informacion detalla de las tareas listadas
 
-![Modal detallada](./capturas/modaldetallada)
+![Modal detallada](./capturas/modaldetallada.png)
 
 Y aqui se ve en la pagina web el modal para ver la informacion detallada de la tarea
 
-![Modal detallada](./capturas/modaldetalladaweb)
+![Modal detallada](./capturas/modaldetalladaweb.png)
 
 ### Completar las tareas
 
 Aqui mediante este funcion vamos a poder completar las tareas listadas
 
-![Tarea Completada](./capturas/completar)
+![Tarea Completada](./capturas/completar.png)
 
 Y cuando demos en completar si no hay mas tareas queda con en la pantalla principal ya que se limpia la tarea ya que se la completo
 
@@ -151,24 +152,23 @@ Y cuando demos en completar si no hay mas tareas queda con en la pantalla princi
 
 Aqui mediante este modal vamos a poder editar las tareas listadas
 
-![Tarea Editada](./capturas/editar)
+![Tarea Editada](./capturas/editar.png)
 
 Y aqui se ve en la pagina web el modal para editar la tarea
 
-![Tarea Editada](./capturas/editarweb)
+![Tarea Editada](./capturas/editarweb.png)
 
 ### Eliminar tareas
 
 Aqui mediante esta funcion vamos a poder eliminar las tareas listadas
 
-![Tarea Eliminada](./capturas/eliminar)
+![Tarea Eliminada](./capturas/eliminar.png)
 
 Y aqui se ve en la pagina web nos muestra un mensaje de confirmacion para poder eliminar
 
-![Tarea Eliminada](./capturas/eliminarweb)
+![Tarea Eliminada](./capturas/eliminarweb.png)
 
 ---
-
 
 ## 👨‍💻 Autor
 
