@@ -11,7 +11,7 @@ export class EspeNavbar extends LitElement {
       flex-direction: column;
       border-bottom: 1px solid #214a3c;
       padding: 0.75rem 1rem;
-      background-color: #0d1e15;
+      background-color: #10231c;
       color: white;
     }
     @media (min-width: 768px) {

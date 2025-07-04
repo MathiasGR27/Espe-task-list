@@ -1,154 +1,209 @@
 import { LitElement, html, css } from 'lit-element';
-import './navbar';
+import './espe-task-modal.js';
 
 export class EspeTaskList extends LitElement {
   static styles = css`
-  :host {
-    display: flex;
-    justify-content: center;
-    padding: 2rem;
-    background-color: #0d1e15;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-  }
+    :host {
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      background-color: #10231c;
+      font-family: Manrope, 'Noto Sans', sans-serif;
+      color: white;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
 
-  .container {
-    max-width: 700px;
-    width: 100%;
-  }
+    .layout-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1rem 1rem;
+    }
 
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #8ecdb7;
-    text-align: center;
-  }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #214a3c;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+    }
 
-  button {
-    background-color: #214a3c;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease;
-  }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
 
-  button:hover {
-    background-color: #3a6c56;
-  }
+    .logo {
+      width: 16px;
+      height: 16px;
+      color: white;
+    }
 
-  .task-item {
-    background-color: #10231c;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.3s ease;
-  }
+    .header-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.015em;
+    }
 
-  .task-item:hover {
-    background-color: #1b3e2e;
-  }
+    .main-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.025em;
+      margin: 1rem 0;
+    }
 
-  .task-item.completed {
-    background-color: #214a3c;
-    text-decoration: line-through;
-    opacity: 0.8;
-  }
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #2f6a55;
+      margin-bottom: 1rem;
+    }
 
-  .contenido {
-    flex: 1;
-  }
+    .tab {
+      padding: 1rem 0;
+      margin-right: 2rem;
+      border-bottom: 3px solid transparent;
+      color: #8ecdb7;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-  .acciones {
-    display: flex;
-    gap: 0.5rem;
-    margin-left: 1rem;
-  }
+    .tab.active {
+      border-bottom-color: #019863;
+      color: white;
+    }
 
-  .modal {
-    position: fixed;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    background-color: #10231c;
-    padding: 1.5rem;
-    width: 90%;
-    max-width: 450px;
-    border: 2px solid #214a3c;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-  }
+    .section-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: white;
+      margin: 1rem 0 0.5rem 0;
+      letter-spacing: -0.015em;
+    }
 
-  .hidden {
-    display: none;
-  }
+    .add-task-btn {
+      background-color: #019863;
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.015em;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+      align-self: flex-end;
+      transition: background-color 0.3s ease;
+    }
 
-  input, textarea, select {
-    width: 100%;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #8ecdb7;
-    background-color: #16382e;
-    color: white;
-  }
+    .add-task-btn:hover {
+      background-color: #017a54;
+    }
 
-  input::placeholder,
-  textarea::placeholder {
-    color: #8ecdb7;
-  }
+    .task-item {
+      background-color: #17352b;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      border: 1px solid transparent;
+    }
 
-  .fecha {
-    color: #8ecdb7;
-    margin-top: 2rem;
-    font-size: 1.1rem;
-  }
+    .task-item:hover {
+      background-color: #1a3b2f;
+      border-color: #2f6a55;
+    }
 
-  .icono-circulo {
-    margin-right: 0.8rem;
-    color: #8ecdb7;
-  }
+    .task-item.completed {
+      background-color: #214a3c;
+      opacity: 0.7;
+    }
 
-  .nombre {
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
+    .task-item.completed .task-content {
+      text-decoration: line-through;
+    }
 
-  .hora {
-    font-size: 0.9rem;
-    color: #8ecdb7;
-  }
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex: 1;
+    }
 
-  .actions button {
-    flex: 1;
-    background-color: #214a3c;
-    color: white;
-    border-radius: 6px;
-    border: none;
-    padding: 0.5rem;
-    font-weight: 600;
-  }
+    .task-icon {
+      width: 24px;
+      height: 24px;
+      color: #8ecdb7;
+      flex-shrink: 0;
+    }
 
-  .actions button:hover {
-    background-color: #3a6c56;
-  }
-`;
+    .task-content {
+      flex: 1;
+    }
 
+    .task-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 0 0 0.25rem 0;
+      color: white;
+    }
+
+    .task-time {
+      font-size: 0.875rem;
+      color: #8ecdb7;
+      margin: 0;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      color: #8ecdb7;
+      transition: color 0.3s ease;
+    }
+
+    .action-btn:hover {
+      color: white;
+    }
+
+    /* Responsive omitted for brevity... */
+  `;
 
   static get properties() {
     return {
       tasks: { type: Array },
-      theme: { type: String },
       showAddModal: { type: Boolean },
       showEditModal: { type: Boolean },
-      selectedTask: { type: Object }
+      showDetailModal: { type: Boolean },
+      selectedTask: { type: Object },
+
+      nombreNueva: { type: String },
+      descripcionNueva: { type: String },
+      horaNueva: { type: String },
+      prioridadNueva: { type: String },
+
+      activeTab: { type: String }
     };
   }
 
@@ -157,182 +212,232 @@ export class EspeTaskList extends LitElement {
     this.tasks = [];
     this.showAddModal = false;
     this.showEditModal = false;
+    this.showDetailModal = false;
     this.selectedTask = null;
+    this.activeTab = 'fecha';
+
+    this.nombreNueva = '';
+    this.descripcionNueva = '';
+    this.horaNueva = '10:00';
+    this.prioridadNueva = 'media';
   }
 
   render() {
-    // Agrupar tareas por fecha
-    const groupedTasks = this.tasks.reduce((acc, task) => {
-      const fecha = task.fecha || 'Sin fecha';
-      if (!acc[fecha]) acc[fecha] = [];
-      acc[fecha].push(task);
-      return acc;
-    }, {});
-  
     return html`
-  <div class="container">
-    <h2>Mis Tareas</h2>
-      <button @click="${this.abrirModalAgregar}">➕ Nueva Tarea</button>
-  
-      ${Object.keys(groupedTasks).map(
-        fecha => html`
-          <h3 class="fecha">${fecha.charAt(0).toUpperCase() + fecha.slice(1)}</h3>
-          ${groupedTasks[fecha].map(
-            task => html`
-              <div
-                class="task-item ${task.completada ? 'completed' : ''}"
-                @click="${() => this.verDetalles(task)}"
-              >
-                <div class="icono-circulo">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
-                    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Z"></path>
-                  </svg>
-                </div>
-                <div class="contenido">
-                  <p class="nombre">${task.nombre}</p>
-                  <p class="hora">${task.fecha}</p>
-                </div>
-                <div class="acciones" @click="${e => e.stopPropagation()}">
-                  <button class="editar" @click="${() => this.editarTarea(task)}" title="Editar tarea">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"></path>
-                    </svg>
-                  </button>
-                  <button class="eliminar" @click="${() => this.eliminarTarea(task.id)}" title="Eliminar tarea">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                    </svg>
-                  </button>
+      <div class="layout-container">
+
+        <!-- Main Content -->
+        <h2 class="main-title">Mis Tareas</h2>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <div
+            class="tab ${this.activeTab === 'fecha' ? 'active' : ''}"
+            @click="${() => (this.activeTab = 'fecha')}"
+          >
+            Por Fecha
+          </div>
+          <div
+            class="tab ${this.activeTab === 'prioridad' ? 'active' : ''}"
+            @click="${() => (this.activeTab = 'prioridad')}"
+          >
+            Por Prioridad
+          </div>
+        </div>
+
+        <!-- Tasks Section -->
+        <h3 class="section-title">Hoy</h3>
+
+        ${this._filtrarTareas().map(
+      (task) => html`
+            <div
+              class="task-item ${task.completada ? 'completed' : ''}"
+              @click="${() => this.verDetalles(task)}"
+            >
+              <div class="task-left">
+                <svg
+                  class="task-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+                <div class="task-content">
+                  <p class="task-name">${task.nombre}</p>
+                  <p class="task-time">${task.hora || '10:00'}</p>
                 </div>
               </div>
-            `
-          )}
-        `
-      )}
+              <div class="task-actions" @click="${(e) => e.stopPropagation()}">
+                <button
+                  class="action-btn"
+                  @click="${() => this.editarTarea(task)}"
+                  title="Editar"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"
+                    ></path>
+                  </svg>
+                </button>
+                <button
+                  class="action-btn"
+                  @click="${() => this.eliminarTarea(task.id)}"
+                  title="Eliminar"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          `
+    )}
 
-  
-      <!-- Modal Agregar -->
-      <div class="${this.showAddModal ? 'modal' : 'hidden'}">
-        <h3>Nueva Tarea</h3>
-        <input id="nombre" placeholder="Nombre" />
-        <textarea id="descripcion" placeholder="Descripción"></textarea>
-        <input id="fecha" type="date" />
-        <select id="prioridad">
-          <option>Baja</option>
-          <option>Media</option>
-          <option>Alta</option>
-        </select>
-        <button @click="${this.agregarTarea}">Guardar</button>
-        <button @click="${this.cerrarModales}">Cancelar</button>
+        <!-- Add Task Button -->
+        <button class="add-task-btn" @click="${this.abrirModalAgregar}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"
+            ></path>
+          </svg>
+          Agregar Tarea
+        </button>
+
+        <!-- Modals -->
+        <espe-task-modal
+          .show="${this.showAddModal || this.showEditModal || this.showDetailModal}"
+          .mode="${this.showAddModal ? 'add' : this.showEditModal ? 'edit' : this.showDetailModal ? 'detail' : ''}"
+          .selectedTask="${this.selectedTask}"
+          .nombreNueva="${this.nombreNueva}"
+          .descripcionNueva="${this.descripcionNueva}"
+          .horaNueva="${this.horaNueva}"
+          .prioridadNueva="${this.prioridadNueva}"
+
+          @close-modal="${this.cerrarModales}"
+          @add-task="${this.agregarTarea}"
+          @update-task="${this.actualizarTarea}"
+          @save-edit="${this.guardarEdicion}"
+          @complete-task="${this.completarTarea}"
+        ></espe-task-modal>
+
       </div>
-  
-      <!-- Modal Detalles -->
-<div class="${this.selectedTask ? 'modal' : 'hidden'}">
-  <h3>Detalles de la Tarea</h3>
-  <p><strong>Nombre:</strong> ${this.selectedTask?.nombre}</p>
-  <p><strong>Descripción:</strong> ${this.selectedTask?.descripcion}</p>
-  <p><strong>Fecha:</strong> ${this.selectedTask?.fecha}</p>
-  <p><strong>Prioridad:</strong> ${this.selectedTask?.prioridad}</p>
-  <div class="actions">
-    <button @click="${() => this.completarTarea(this.selectedTask.id)}">✅ Completar</button>
-    <button @click="${this.cerrarModales}">Cerrar</button>
-  </div>
-</div>
-  
-      <!-- Modal Editar -->
-      <div class="${this.showEditModal ? 'modal' : 'hidden'}">
-        <h3>Editar Tarea</h3>
-        <input id="edit-nombre" .value="${this.selectedTask?.nombre || ''}" />
-        <textarea id="edit-descripcion">${this.selectedTask?.descripcion || ''}</textarea>
-        <input id="edit-fecha" type="date" .value="${this.selectedTask?.fecha || ''}" />
-        <select id="edit-prioridad">
-          <option ?selected="${this.selectedTask?.prioridad === 'Baja'}">Baja</option>
-          <option ?selected="${this.selectedTask?.prioridad === 'Media'}">Media</option>
-          <option ?selected="${this.selectedTask?.prioridad === 'Alta'}">Alta</option>
-        </select>
-        <button @click="${this.guardarEdicion}">Actualizar</button>
-        <button @click="${this.cerrarModales}">Cancelar</button>
-      </div>
-  </div>
-`;
+    `;
+  }
+
+  _filtrarTareas() {
+    if (this.activeTab === 'prioridad') {
+      const prioridades = ['alta', 'media', 'baja'];
+      return this.tasks
+        .filter(t => !t.completada)
+        .sort((a, b) => prioridades.indexOf(a.prioridad) - prioridades.indexOf(b.prioridad));
+    } else {
+      return this.tasks
+        .filter(t => !t.completada)
+        .sort((a, b) => (a.hora || '').localeCompare(b.hora || ''));
+    }
   }
 
   abrirModalAgregar() {
+    this.nombreNueva = '';
+    this.descripcionNueva = '';
+    this.horaNueva = '10:00';
+    this.prioridadNueva = 'media';
     this.showAddModal = true;
+    this.showEditModal = false;
+    this.showDetailModal = false;
+    this.selectedTask = null;
+  }
+
+  editarTarea(task) {
+    this.selectedTask = { ...task };
+    this.showEditModal = true;
+    this.showAddModal = false;
+    this.showDetailModal = false;
+  }
+
+  verDetalles(task) {
+    this.selectedTask = { ...task };
+    this.showDetailModal = true;
+    this.showAddModal = false;
+    this.showEditModal = false;
   }
 
   cerrarModales() {
     this.showAddModal = false;
     this.showEditModal = false;
+    this.showDetailModal = false;
     this.selectedTask = null;
+    this.nombreNueva = '';
+    this.descripcionNueva = '';
+    this.horaNueva = '10:00';
+    this.prioridadNueva = 'media';
   }
 
-  agregarTarea() {
-    const nombre = this.shadowRoot.getElementById('nombre').value.trim();
-    const descripcion = this.shadowRoot.getElementById('descripcion').value.trim();
-    const fecha = this.shadowRoot.getElementById('fecha').value;
-    const prioridad = this.shadowRoot.getElementById('prioridad').value;
+  agregarTarea(e) {
+  const { nombre, descripcion, hora, prioridad } = e.detail;
+  if (!nombre || !hora) return;
 
-    if (!nombre || !fecha) {
-      alert('El nombre y la fecha son obligatorios.');
-      return;
-    }
+  const nuevaTarea = {
+    id: Date.now(),
+    nombre,
+    descripcion,
+    hora,
+    prioridad,
+    completada: false,
+  };
 
-    const nuevaTarea = {
-      id: Date.now(),
-      nombre,
-      descripcion,
-      fecha,
-      prioridad,
-      completada: false,
-    };
+  this.tasks = [...this.tasks, nuevaTarea];
 
-    this.tasks = [...this.tasks, nuevaTarea];
-    this.dispatchEvent(new CustomEvent('task-added', { detail: { task: nuevaTarea } }));
+  this.cerrarModales();
+}
+
+
+  actualizarTarea(e) {
+    const tareaEditada = e.detail;
+    this.selectedTask = tareaEditada;
+  }
+
+  guardarEdicion(e) {
+    const tareaEditada = e.detail;
+    if (!tareaEditada.nombre.trim() || !tareaEditada.hora) return;
+    this.tasks = this.tasks.map(t => (t.id === tareaEditada.id ? tareaEditada : t));
     this.cerrarModales();
-
-    this.shadowRoot.getElementById('nombre').value = '';
-    this.shadowRoot.getElementById('descripcion').value = '';
-    this.shadowRoot.getElementById('fecha').value = '';
-    this.shadowRoot.getElementById('prioridad').value = 'Baja'
   }
 
-  completarTarea(id) {
-    this.tasks = this.tasks.map(t =>
-      t.id === id ? { ...t, completada: true } : t
-    );
-    this.dispatchEvent(new CustomEvent('task-completed', { detail: { id } }));
+  completarTarea(e) {
+    const tarea = e.detail;
+    this.tasks = this.tasks.filter(t => t.id !== tarea.id);
+    this.cerrarModales();
   }
 
   eliminarTarea(id) {
+  const confirmacion = window.confirm('¿Estás seguro que deseas eliminar esta tarea?');
+  if (confirmacion) {
     this.tasks = this.tasks.filter(t => t.id !== id);
-    this.dispatchEvent(new CustomEvent('task-deleted', { detail: { id } }));
   }
+}
 
-  editarTarea(task) {
-    this.selectedTask = task;
-    this.showEditModal = true;
-  }
-
-  verDetalles(task) {
-    this.selectedTask = task;
-  }
-
-  guardarEdicion() {
-    const nombre = this.shadowRoot.getElementById('edit-nombre').value.trim();
-    const descripcion = this.shadowRoot.getElementById('edit-descripcion').value.trim();
-    const fecha = this.shadowRoot.getElementById('edit-fecha').value;
-    const prioridad = this.shadowRoot.getElementById('edit-prioridad').value;
-
-    this.tasks = this.tasks.map(t =>
-      t.id === this.selectedTask.id
-        ? { ...t, nombre, descripcion, fecha, prioridad }
-        : t
-    );
-
-    this.dispatchEvent(new CustomEvent('task-updated', { detail: { id: this.selectedTask.id } }));
-    this.cerrarModales();
-  }
 }
 
 customElements.define('espe-task-list', EspeTaskList);
