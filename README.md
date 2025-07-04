@@ -170,6 +170,6 @@ Y aqui se ve en la pagina web nos muestra un mensaje de confirmacion para poder 
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 Mathias Gualpa - Proyecto de Práctica LitElement (Gestión de tareas)
